@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>盧昱安 (Angie Lu) - 個人履歷網站</title>
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary: #38bdf8;          /* 柔和天藍色 */
+      --primary-light: #7dd3fc;    /* 極淡粉藍 */
+      --primary-dark: #0284c7;     /* 沉穩天青藍 (文字/重點用) */
+      --accent: #f59e0b;
+      --bg: #f0f9ff;               /* 清爽淡藍背景 (Sky-50) */
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #e0f2fe;           /* 淡藍邊框 */
+      --shadow-sm: 0 1px 2px 0 rgb(14 165 233 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(14 165 233 / 0.08), 0 2px 4px -2px rgb(14 165 233 / 0.05);
+      --shadow-lg: 0 10px 15px -3px rgb(14 165 233 / 0.1), 0 4px 6px -4px rgb(14 165 233 / 0.08);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Print & Export styles */
+    @media print {
+      body {
+        background: white;
+        color: black;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .card {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+        page-break-inside: avoid;
+      }
+      .hero {
+        padding: 20px 0 !important;
+      }
+    }
+
+    /* Top Nav / Quick Action Bar */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+    }
+    .top-bar-inner {
+      max-width: 1024px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .action-btn:hover {
+      background: #f1f5f9;
+      transform: translateY(-1px);
+    }
+    .action-btn.primary {
+      background: #0284c7;
+      color: white;
+      border-color: #0284c7;
+    }
+    .action-btn.primary:hover {
+      background: #0369a1;
+    }
+
+    /* Layout Container */
+    .container {
+      max-width: 1024px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+
+    /* Hero Banner */
+    .hero {
+      background: linear-gradient(135deg, #0284c7 0%, #38bdf8 55%, #bae6fd 100%);
+      border-radius: var(--radius);
+      padding: 44px 36px;
+      color: white;
+      box-shadow: 0 12px 24px -6px rgba(14, 165, 233, 0.25);
+      margin-bottom: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: -30%;
+      right: -10%;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-main {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 24px;
+    }
+    .avatar-wrapper {
+      width: 96px;
+      height: 96px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      border: 3px solid rgba(255,255,255,0.8);
+      font-size: 2.4rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .hero-info h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+    }
+    .hero-info .en-name {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      font-weight: 500;
+      margin-left: 8px;
+    }
+    .hero-info .tagline {
+      font-size: 1.05rem;
+      opacity: 0.92;
+      margin-top: 6px;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .status-badge {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      padding: 2px 10px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+    }
+
+    /* Contact Cards inside Hero */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.12);
+      padding: 10px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: white;
+      transition: background 0.2s;
+      font-size: 0.9rem;
+    }
+    .contact-item:hover {
+      background: rgba(255, 255, 255, 0.22);
+    }
+    .contact-item i {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Grid Layout: Main & Side */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 28px;
+    }
+    @media (max-width: 820px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Card Component */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+    }
+    .card:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 14px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #f1f5f9;
+      position: relative;
+    }
+    .card-title::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 48px;
+      height: 2px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+    .card-title i {
+      color: var(--primary);
+    }
+
+    /* Self Introduction & Highlights */
+    .bio-text {
+      color: #334155;
+      font-size: 0.98rem;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .highlight-points {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    @media (max-width: 600px) {
+      .highlight-points {
+        grid-template-columns: 1fr;
+      }
+    }
+    .highlight-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 0.88rem;
+      color: #475569;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .highlight-box i {
+      color: #10b981;
+      margin-top: 3px;
+    }
+
+    /* Timeline Section (Work & Edu) */
+    .timeline {
+      position: relative;
+      padding-left: 24px;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: #e2e8f0;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 24px;
+    }
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+    .timeline-dot {
+      position: absolute;
+      left: -24px;
+      top: 6px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: white;
+      border: 3px solid var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .timeline-role {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .timeline-company {
+      font-size: 0.95rem;
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+    .timeline-date {
+      display: inline-block;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      background: #f1f5f9;
+      padding: 2px 10px;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+    .timeline-content {
+      margin-top: 10px;
+      color: #475569;
+      font-size: 0.92rem;
+    }
+    .timeline-content ul {
+      padding-left: 20px;
+      margin-top: 6px;
+    }
+    .timeline-content li {
+      margin-bottom: 6px;
+    }
+
+    /* Skills Pill badges */
+    .skills-group {
+      margin-bottom: 20px;
+    }
+    .skills-group:last-child {
+      margin-bottom: 0;
+    }
+    .skills-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .skill-tag {
+      background: #eff6ff;
+      color: var(--primary-dark);
+      border: 1px solid #bfdbfe;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .skill-tag.accent {
+      background: #fef3c7;
+      color: #92400e;
+      border-color: #fde68a;
+    }
+
+    /* Language Bar */
+    .lang-item {
+      margin-bottom: 12px;
+    }
+    .lang-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 9999px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding-top: 30px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation / Toolbar -->
+  <div class="top-bar no-print">
+    <div class="top-bar-inner">
+      <div class="brand-name">
+        <i class="fa-solid fa-file-invoice"></i> 盧昱安的線上履歷
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <button class="action-btn" onclick="window.print()">
+          <i class="fa-solid fa-print"></i> 列印 / 轉成 PDF
+        </button>
+        <a class="action-btn primary" href="mailto:angielu0903555930@gmail.com">
+          <i class="fa-solid fa-envelope"></i> 聯絡我
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Header / Hero Section -->
+    <header class="hero">
+      <div class="hero-main">
+        <div class="avatar-wrapper">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <div class="hero-info">
+          <h1>盧昱安 <span class="en-name">Angie Lu</span></h1>
+          <p class="tagline">
+            <span>正面積極、重視品質細節與團隊合作</span>
+            <span class="status-badge">積極求職中</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Contact Info -->
+      <div class="contact-grid">
+        <a href="mailto:angielu0903555930@gmail.com" class="contact-item">
+          <i class="fa-solid fa-envelope"></i>
+          <span>angielu0903555930@gmail.com</span>
+        </a>
+        <a href="tel:0976076558" class="contact-item">
+          <i class="fa-solid fa-phone"></i>
+          <span>0976-076-558</span>
+        </a>
+        <div class="contact-item">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>台灣・桃園市</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <div class="content-grid">
+      <!-- Left Column: Experience, Summary, Projects -->
+      <main>
+        <!-- About Me / Personal Summary -->
+        <section class="card">
+          <h2 class="card-title"><i class="fa-solid fa-user-astronaut"></i> 簡介與職涯特質</h2>
+          <p class="bio-text">
+            您好，我是盧昱安！個性踏實負責、學習意願強，具備出色的耐心與抗壓性。
+            在飲品門市服務與茶飲調製的工作中，培養出嚴謹的時間管理意識、 SOP 流程執行力與高標準的品質堅持；面對顧客時能展現熱忱與親和力，面對高強度工作節奏時能與夥伴緊密協作。
+          </p>
+          <div class="highlight-points">
+            <div class="highlight-box">
+              <i class="fa-solid fa-circle-check"></i>
+              <div><strong>高效率執行力</strong>：迅速掌握作業標準化 SOP，精準完成任務。</div>
+            </div>
+            <div class="highlight-box">
+              <i class="fa-solid fa-circle-check"></i>
+              <div><strong>熱忱與溝通</strong>：親切待客與良好跨團隊溝通協調能力。</div>
+            </div>
+            <div class="highlight-box">
+              <i class="fa-solid fa-circle-check"></i>
+              <div><strong>抗壓與細心</strong>：於高峰時段維持出品質感與環境安全衛生。</div>
+            </div>
+            <div class="highlight-box">
+              <i class="fa-solid fa-circle-check"></i>
+              <div><strong>樂於學習探索</strong>：保持主動積極，隨時準備吸收新領域知識與技能。</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Work Experience -->
+        <section class="card">
+          <h2 class="card-title"><i class="fa-solid fa-briefcase"></i> 工作經歷</h2>
+          <div class="timeline">
+            <!-- Experience Item 1 -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-header">
+                <div>
+                  <div class="timeline-role">門市服務與飲品調製專員</div>
+                  <div class="timeline-company"><i class="fa-solid fa-shop"></i> 優質手搖茶飲門市</div>
+                </div>
+                <div class="timeline-date">2026.03 – 至今</div>
+              </div>
+              <div class="timeline-content">
+                <ul>
+                  <li><strong>原物料品質把關與核心茶湯萃取：</strong> 嚴格遵照水溫、燜煮時間及黃金茶水比例，掌控茶葉風味穩定度，確保每批次茶飲達到最高出品質感。</li>
+                  <li><strong>精準快速調杯與客製化服務：</strong> 於尖峰時段保持專注度，高效率完成多品項客製化甜度冰塊比例，兼顧出杯速度與精準零差錯。</li>
+                  <li><strong>門市營運與顧客接待體驗：</strong> 親切協助顧客點餐與品項推薦，維護門市整潔與食品安全衛生標準，營造良好店鋪形象與口碑。</li>
+                  <li><strong>庫存盤點與耗損管理：</strong> 協助原物料及物料備品之盤點、先進先出管理，維持原物料新鮮度並降低不必要損耗。</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Experience Item 2 -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-header">
+                <div>
+                  <div class="timeline-role">賽務現場與行政庶務專員</div>
+                  <div class="timeline-company"><i class="fa-solid fa-dove"></i> 賽鴿協會 / 鴿會</div>
+                </div>
+                <div class="timeline-date">2025.11 – 至今</div>
+              </div>
+              <div class="timeline-content">
+                <ul>
+                  <li><strong>賽務現場核驗與流程執行：</strong> 協助賽事集鴿作業、環號電子晶片掃描核對、防偽鉛封與進籠檢核，落實嚴謹查核作業，確保賽程公平公正。</li>
+                  <li><strong>行政文書與數據核算登錄：</strong> 協助會員資料登記、繳費核對與賽事相關數據建檔，展現高精準度與細心抗壓的數字觀念。</li>
+                  <li><strong>現場應變與會員接待服務：</strong> 於高張力集鴿與比賽時段，妥善接待鴿友與會員，耐心溝通協調現場動線與突發狀況處理。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Education -->
+        <section class="card">
+          <h2 class="card-title"><i class="fa-solid fa-graduation-cap"></i> 學歷背景</h2>
+          <div class="timeline">
+            <!-- Education 1: 萬能科技大學 -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-header">
+                <div>
+                  <div class="timeline-role">萬能科技大學</div>
+                  <div class="timeline-company">企業管理學系 (就讀中)</div>
+                </div>
+                <div class="timeline-date">2026.09 – 至今</div>
+              </div>
+              <div class="timeline-content">
+                <p>研習現代企業管理實務、組織營運、行銷與專案規劃，培養商業思維、溝通協調與團隊領導潛力。</p>
+              </div>
+            </div>
+
+            <!-- Education 2: 銘傳大學 -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-header">
+                <div>
+                  <div class="timeline-role">銘傳大學</div>
+                  <div class="timeline-company">資訊管理學系</div>
+                </div>
+                <div class="timeline-date">2026.09</div>
+              </div>
+              <div class="timeline-content">
+                <p>修習資訊科技與管理基礎概論，具備基礎數位工具與邏輯分析概念。</p>
+              </div>
+            </div>
+
+            <!-- Education 3: 楊梅高中 -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-header">
+                <div>
+                  <div class="timeline-role">國立楊梅高級中學</div>
+                  <div class="timeline-company">普通科</div>
+                </div>
+                <div class="timeline-date">2022.09 – 2025.06</div>
+              </div>
+              <div class="timeline-content">
+                <p>完成全方位高中通識課程，培養邏輯分析、自主思考能力與團隊分工經驗，打下紮實的學習根基與品格養成。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Right Column: Skills, Languages, Highlights -->
+      <aside>
+        <!-- Professional & Soft Skills -->
+        <section class="card">
+          <h2 class="card-title"><i class="fa-solid fa-star"></i> 核心優勢與技能</h2>
+          
+          <div class="skills-group">
+            <div class="skills-title"><i class="fa-solid fa-award"></i> 門市與營運專長</div>
+            <div class="skill-tags">
+              <span class="skill-tag">飲品專業調製</span>
+              <span class="skill-tag">茶湯燜煮控溫</span>
+              <span class="skill-tag">門市顧客服務</span>
+              <span class="skill-tag">SOP 標準化作業</span>
+              <span class="skill-tag">食品安全衛生</span>
+              <span class="skill-tag">收銀結帳操作</span>
+              <span class="skill-tag">原物料先進先出</span>
+            </div>
+          </div>
+
+          <div class="skills-group">
+            <div class="skills-title"><i class="fa-solid fa-heart"></i> 軟實力 / 個人特質</div>
+            <div class="skill-tags">
+              <span class="skill-tag accent">責任感強</span>
+              <span class="skill-tag accent">團隊合作精神</span>
+              <span class="skill-tag accent">危機與抗壓應變</span>
+              <span class="skill-tag accent">親和力與耐心</span>
+              <span class="skill-tag accent">高學習熱忱</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Language Proficiency -->
+        <section class="card">
+          <h2 class="card-title"><i class="fa-solid fa-language"></i> 語言能力</h2>
+          <div class="lang-item">
+            <div class="lang-info">
+              <span>中文 (Mandarin)</span>
+              <span style="color: var(--primary); font-weight: 600;">母語 / 精通</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 100%;"></div>
+            </div>
+          </div>
+          <div class="lang-item">
+            <div class="lang-info">
+              <span>台語 (Taiwanese)</span>
+              <span style="color: var(--text-muted);">日常生活聽說略通</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 50%;"></div>
+            </div>
+          </div>
+          <div class="lang-item">
+            <div class="lang-info">
+              <span>英文 (English)</span>
+              <span style="color: var(--text-muted);">基礎讀寫日常溝通</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 35%;"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Contact CTA Card -->
+        <section class="card" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border-color: #bae6fd;">
+          <h2 class="card-title" style="color: #0369a1; border-bottom-color: #bae6fd;">
+            <i class="fa-solid fa-paper-plane" style="color: #0284c7;"></i> 期望職缺與合作
+          </h2>
+          <p style="font-size: 0.9rem; color: #0369a1; line-height: 1.6; margin-bottom: 14px;">
+            歡迎各類正職、兼職或實習機會交流！若您正在尋找積極可靠、具責任感的夥伴，歡迎隨時與我聯繫。
+          </p>
+          <a href="mailto:angielu0903555930@gmail.com" class="action-btn primary" style="width: 100%; justify-content: center; background: #0284c7; border-color: #0284c7;">
+            寄信聯繫我
+          </a>
+        </section>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="no-print">
+      <p>© 2026 盧昱安 Angie Lu. All Rights Reserved. | 響應式履歷網頁設計</p>
+    </footer>
+  </div>
+
+</body>
+</html>
